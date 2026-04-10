@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kafeero Mirembe Mercy — Developer & Creator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #12121a;
+    --card: #16161f;
+    --accent: #7cfc8a;
+    --accent2: #a78bfa;
+    --accent3: #f472b6;
+    --text: #e8e8f0;
+    --muted: #6b6b80;
+    --border: rgba(124,252,138,0.15);
+    --glow: 0 0 40px rgba(124,252,138,0.12);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s;
+    mix-blend-mode: screen;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.15s ease;
+    opacity: 0.5;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 500;
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2rem;
+  }
+
+  /* HAMBURGER */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--accent);
+    transition: all 0.3s;
+  }
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(10,10,15,0.97);
+    z-index: 499;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 7rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(124,252,138,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,252,138,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-blob {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+  }
+  .blob1 { background: rgba(124,252,138,0.06); top: -100px; right: -100px; }
+  .blob2 { background: rgba(167,139,250,0.06); bottom: -100px; left: -100px; }
+
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 30px; height: 1px;
+    background: var(--accent);
+  }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+  h1 .name-accent { color: var(--accent); }
+  h1 .name-line { display: block; }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+  }
+  .hero-desc strong { color: var(--text); }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent);
+    color: #0a0a0f;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.85rem 1.8rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(124,252,138,0.3); }
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: var(--text);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    padding: 0.85rem 1.8rem;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* PHOTO CARD */
+  .hero-photo-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  .photo-frame {
+    position: relative;
+    width: 320px; height: 380px;
+  }
+  .photo-frame::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));
+    z-index: 0;
+  }
+  .photo-frame img {
+    position: relative;
+    z-index: 1;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 18px;
+    display: block;
+  }
+  .photo-badge {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.8rem 1.2rem;
+    z-index: 2;
+    box-shadow: var(--glow);
+  }
+  .photo-badge-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+  }
+  .photo-badge-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1;
+  }
+  .github-badges {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.8rem 1.2rem;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .github-badges span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent2);
+  }
+
+  /* SCROLL INDICATOR */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    animation: bounce 2s infinite;
+    z-index: 2;
+  }
+  .scroll-hint span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .scroll-arrow {
+    width: 20px; height: 20px;
+    border-right: 1px solid var(--muted);
+    border-bottom: 1px solid var(--muted);
+    transform: rotate(45deg);
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-full {
+    max-width: 100%;
+    padding: 6rem 0;
+    background: var(--bg2);
+  }
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 40px;
+    height: 1px;
+    background: var(--accent);
+  }
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .about-text p {
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+  }
+  .about-text p strong { color: var(--text); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1.4rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 2px;
+    background: var(--accent);
+    width: 0;
+    transition: width 0.4s ease;
+  }
+  .skill-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .skill-card:hover::before { width: 100%; }
+  .skill-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .skill-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--text);
+    font-weight: 700;
+  }
+  .skill-level {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+
+  /* PROJECTS */
+  .projects-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .filter-tabs {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(124,252,138,0.08);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .project-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    background: linear-gradient(135deg, transparent 60%, rgba(124,252,138,0.05));
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .project-card:hover { border-color: rgba(124,252,138,0.4); transform: translateY(-5px); box-shadow: var(--glow); }
+  .project-card:hover::after { opacity: 1; }
+  .project-card.hidden { display: none; }
+
+  .project-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+  .project-icon {
+    font-size: 2rem;
+    line-height: 1;
+  }
+  .project-lang {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    background: rgba(124,252,138,0.1);
+    border: 1px solid rgba(124,252,138,0.2);
+    padding: 0.25rem 0.7rem;
+    border-radius: 2rem;
+    letter-spacing: 0.05em;
+  }
+  .project-lang.py { color: #60a5fa; background: rgba(96,165,250,0.1); border-color: rgba(96,165,250,0.2); }
+  .project-lang.c { color: var(--accent3); background: rgba(244,114,182,0.1); border-color: rgba(244,114,182,0.2); }
+  .project-lang.web { color: var(--accent2); background: rgba(167,139,250,0.1); border-color: rgba(167,139,250,0.2); }
+
+  .project-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+  .project-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+  }
+  .project-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .project-category {
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+  .project-link {
+    color: var(--accent);
+    font-size: 1rem;
+    text-decoration: none;
+    transition: transform 0.2s;
+    display: inline-block;
+  }
+  .project-link:hover { transform: translate(3px, -3px); }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 2rem;
+  }
+  .stats-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* TIMELINE / JOURNEY */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+  }
+  .timeline-item {
+    position: relative;
+    padding-bottom: 2.5rem;
+    padding-left: 1.5rem;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2rem; top: 6px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 15px rgba(124,252,138,0.5);
+  }
+  .timeline-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+  .timeline-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  .timeline-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .contact-info h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+  .contact-info p {
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--text);
+    padding: 1rem 1.2rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: all 0.2s;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateX(5px); }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .form-input, .form-textarea {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+    outline: none;
+    resize: none;
+  }
+  .form-input:focus, .form-textarea:focus { border-color: var(--accent); }
+  .form-textarea { min-height: 130px; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .footer-text span { color: var(--accent); }
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+  .footer-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* MARQUEE */
+  .marquee-wrap {
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+    background: var(--bg2);
+    margin: 4rem 0 0;
+  }
+  .marquee {
+    display: flex;
+    gap: 3rem;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+  .marquee-item::before {
+    content: '✦';
+    color: var(--accent);
+    font-size: 0.6rem;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-photo-wrap { order: -1; }
+    .photo-frame { width: 240px; height: 290px; }
+    .about-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .nav-links { display: none; }
+    .nav-badge { display: none; }
+    .hamburger { display: flex; }
+  }
+
+  @media (max-width: 600px) {
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .stats-inner { grid-template-columns: 1fr 1fr; }
+    .footer-inner { flex-direction: column; text-align: center; }
+    h1 { font-size: 2.8rem; }
+  }
+
+  /* ACTIVE NAV STATE */
+  .typing-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: var(--accent);
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#home">KMM.dev</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <span class="nav-badge">🏅 3 GitHub Badges</span>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#projects" onclick="closeMobile()">Projects</a>
+  <a href="#journey" onclick="closeMobile()">Journey</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-blob blob1"></div>
+  <div class="hero-blob blob2"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-tag">Developer · Creator · Learner</div>
+      <h1>
+        <span class="name-line">Kafeero</span>
+        <span class="name-line">Mirembe</span>
+        <span class="name-line name-accent">Mercy.</span>
+      </h1>
+      <p class="hero-desc">
+        I build <strong>games, tools & websites</strong> — from Python pygame adventures to C management systems. 
+        Currently learning & shipping at full speed. 
+        <span id="typed"></span><span class="typing-cursor"></span>
+      </p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-primary">View My Work →</a>
+        <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="btn-outline">⭐ GitHub</a>
+      </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <div class="photo-frame">
+        <div class="github-badges">
+          <span>🏅</span>
+          <span>3 GitHub Badges</span>
+        </div>
+        <img src="/mnt/user-data/uploads/f865d6c0-f8e7-4f1f-8169-77bf543f01e3.jpeg" alt="Kafeero Mirembe Mercy" />
+        <div class="photo-badge">
+          <div class="photo-badge-text">Projects Built</div>
+          <div class="photo-badge-num">30+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee">
+    <span class="marquee-item">Python</span>
+    <span class="marquee-item">HTML & CSS</span>
+    <span class="marquee-item">JavaScript</span>
+    <span class="marquee-item">C Language</span>
+    <span class="marquee-item">Game Development</span>
+    <span class="marquee-item">Web Design</span>
+    <span class="marquee-item">Open Source</span>
+    <span class="marquee-item">Pygame</span>
+    <span class="marquee-item">Student Developer</span>
+    <span class="marquee-item">Always Learning</span>
+    <!-- Duplicate for seamless loop -->
+    <span class="marquee-item">Python</span>
+    <span class="marquee-item">HTML & CSS</span>
+    <span class="marquee-item">JavaScript</span>
+    <span class="marquee-item">C Language</span>
+    <span class="marquee-item">Game Development</span>
+    <span class="marquee-item">Web Design</span>
+    <span class="marquee-item">Open Source</span>
+    <span class="marquee-item">Pygame</span>
+    <span class="marquee-item">Student Developer</span>
+    <span class="marquee-item">Always Learning</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="fade-up">
+      <div class="stat-num" data-target="30">0</div>
+      <div class="stat-label">Projects Built</div>
+    </div>
+    <div class="fade-up">
+      <div class="stat-num" data-target="4">0</div>
+      <div class="stat-label">Languages Used</div>
+    </div>
+    <div class="fade-up">
+      <div class="stat-num" data-target="3">0</div>
+      <div class="stat-label">GitHub Badges</div>
+    </div>
+    <div class="fade-up">
+      <div class="stat-num" data-target="100">0</div>
+      <div class="stat-label">Passion %</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text fade-up">
+      <div class="section-label">About Me</div>
+      <h2>Code is my<br><span style="color:var(--accent)">superpower.</span></h2>
+      <p>Hey! I'm <strong>Mercy</strong> — a passionate young developer who loves turning ideas into real, working programs. I started with Python games and haven't stopped building since.</p>
+      <p>From <strong>balloon shooters</strong> to <strong>snake games</strong>, from <strong>music players</strong> to <strong>student management systems</strong> — I build things that work, and I learn from every line of code.</p>
+      <p>I'm currently exploring web development with HTML, CSS & JavaScript, and expanding my skills in <strong>C programming</strong>. Every day is a new opportunity to create something amazing.</p>
+      <div style="margin-top:2rem;">
+        <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="btn-primary">View GitHub Profile</a>
+      </div>
+    </div>
+    <div class="skills-grid fade-up">
+      <div class="skill-card">
+        <div class="skill-icon">🐍</div>
+        <div class="skill-name">Python</div>
+        <div class="skill-level">Games · Tools · GUI Apps</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🌐</div>
+        <div class="skill-name">HTML & CSS</div>
+        <div class="skill-level">Websites · Layouts · Styling</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">⚡</div>
+        <div class="skill-name">JavaScript</div>
+        <div class="skill-level">Interactivity · Web Games</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">⚙️</div>
+        <div class="skill-name">C Language</div>
+        <div class="skill-level">Systems · Management Apps</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🎮</div>
+        <div class="skill-name">Game Dev</div>
+        <div class="skill-level">Pygame · Logic · Design</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🚀</div>
+        <div class="skill-name">Always Learning</div>
+        <div class="skill-level">Growing every day</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<div class="section-full" id="projects">
+  <div class="section-inner">
+    <div class="projects-header">
+      <div>
+        <div class="section-label">My Work</div>
+        <h2>Projects I've<br><span style="color:var(--accent)">Built.</span></h2>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="python">Python</button>
+        <button class="filter-btn" data-filter="web">Web</button>
+        <button class="filter-btn" data-filter="c">C Lang</button>
+        <button class="filter-btn" data-filter="game">Games</button>
+      </div>
+    </div>
+    <div class="projects-grid" id="projectsGrid">
+
+      <!-- GAMES -->
+      <div class="project-card" data-category="game python">
+        <div class="project-top">
+          <div class="project-icon">🎈</div>
+          <span class="project-lang py">Python</span>
+        </div>
+        <div class="project-name">Balloon Shooter</div>
+        <div class="project-desc">A fun arcade-style game where players shoot down flying balloons. Built with Python and Pygame, featuring collision detection and score tracking.</div>
+        <div class="project-footer">
+          <span class="project-category">Game · Pygame</span>
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="project-link">↗</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="game python">
+        <div class="project-top">
+          <div class="project-icon">🐍</div>
+          <span class="project-lang py">Python</span>
+        </div>
+        <div class="project-name">Snake Game</div>
+        <div class="project-desc">Classic snake game reimagined in Python. Features smooth movement, growing mechanics, and increasing difficulty as your score rises.</div>
+        <div class="project-footer">
+          <span class="project-category">Game · Pygame</span>
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="project-link">↗</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="game python">
+        <div class="project-top">
+          <div class="project-icon">🪙</div>
+          <span class="project-lang py">Python</span>
+        </div>
+        <div class="project-name">Coin Collector</div>
+        <div class="project-desc">A gamified coin-collecting experience built in Python. Navigate and collect coins with increasing challenge and combo mechanics.</div>
+        <div class="project-footer">
+          <span class="project-category">Game · Gamefied</span>
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="project-link">↗</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="game python">
+        <div class="project-top">
+          <div class="project-icon">🏀</div>
+          <span class="project-lang py">Python</span>
+        </div>
+        <div class="project-name">Ball Catcher</div>
+        <div class="project-desc">Catch falling balls before they hit the ground. A reaction-time game with smooth animations and escalating speed.</div>
+        <div class="project-footer">
+          <span class="project-category">Game · ball-catcher.py</span>
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="project-link">↗</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="game python">
+        <div class="project-top">
+          <div class="project-icon">🐦</div>
+          <span class="project-lang py">Python</span>
+        </div>
+        <div class="project-name">Flappy Bird Clone</div>
+        <div class="project-desc">A full recreation of the beloved Flappy Bird game in Python/Pygame with custom graphics and physics-based movement.</div>
+        <div class="project-footer">
+          <span class="project-category">Game · flappy_bird.py</span>
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="project-link">↗</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="game python">
+        <div class="project-top">
+          <div class="project-icon">🚀</div>
+          <span class="project-lang py">Python</span>
+        </div>
+        <div class="project-name">Space Shooter</div>
+        <div class="project-desc">Defend the galaxy from alien invaders in this top-down space shooter with projectile systems and multiple enemy waves.</div>
+        <div class="project-footer">
+          <span class="project-category">Game · spaceShooter.py</span>
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="project-link">↗</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="game python">
+        <div class="project-top">
+          <div class="project-icon">🥚</div>
+          <span class="project-lang py">Python</span>
+        </div>
+        <div class="project-name">Egg Catcher</div>
+        <div class="project-desc">A fun catcher game where eggs fall from the top and you must catch them before they break. Tests your reflexes and coordination.</div>
+        <div class="project-footer">
+          <span class="project-category">Game · egg_catcher.py</span>
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="project-link">↗</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="python">
+        <div class="project-top">
+          <div class="project-icon">🎵</div>
+          <span class="project-lang py">Python</span>
+        </div>
+        <div class="project-name">Music Player</div>
+        <div class="project-desc">A fully functional desktop music player built in Python with playlist management, playback controls, and a clean GUI interface.</div>
+        <div class="project-footer">
+          <span class="project-category">Tool · Music_Player.py</span>
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="project-link">↗</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="python">
+        <div class="project-top">
+          <div class="project-icon">🔑</div>
+          <span class="project-lang py">Python</span>
+        </div>
+        <div class="project-name">Password Generator</div>
+        <div class="project-desc">Generates secure, randomized passwords with customizable length and character sets. Keeps your accounts safe with strong credentials.</div>
+        <div class="project-footer">
+          <span class="project-category">Tool · password_generator.py</span>
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="project-link">↗</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="python">
+        <div class="project-top">
+          <div class="project-icon">🤖</div>
+          <span class="project-lang py">Python</span>
+        </div>
+        <div class="project-name">Robot Builder</div>
+        <div class="project-desc">An interactive robot-building simulation in Python. Design and configure virtual robots with different components and behaviors.</div>
+        <div class="project-footer">
+          <span class="project-category">Creative · praise's robot builder.py</span>
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="project-link">↗</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="python">
+        <div class="project-top">
+          <div class="project-icon">🌈</div>
+          <span class="project-lang py">Python</span>
+        </div>
+        <div class="project-name">Mutant Rainbow</div>
+        <div class="project-desc">A creative visual project using Python's turtle graphics to generate beautiful, mutating rainbow patterns and kaleidoscopic effects.</div>
+        <div class="project-footer">
+          <span class="project-category">Art · Muntant Rainbow.py</span>
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="project-link">↗</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="python">
+        <div class="project-top">
+          <div class="project-icon">🐛</div>
+          <span class="project-lang py">Python</span>
+        </div>
+        <div class="project-name">Caterpillar</div>
+        <div class="project-desc">An animated caterpillar simulation in Python, featuring movement algorithms and segment-based body animation.</div>
+        <div class="project-footer">
+          <span class="project-category">Animation · caterpillar.py</span>
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="project-link">↗</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="python">
+        <div class="project-top">
+          <div class="project-icon">⏳</div>
+          <span class="project-lang py">Python</span>
+        </div>
+        <div class="project-name">Countdown Calendar</div>
+        <div class="project-desc">Track important dates with this countdown calendar app. See exactly how many days remain until your next big event.</div>
+        <div class="project-footer">
+          <span class="project-category">Tool · countdown calendar.py</span>
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="project-link">↗</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="python">
+        <div class="project-top">
+          <div class="project-icon">🧩</div>
+          <span class="project-lang py">Python</span>
+        </div>
+        <div class="project-name">Matchmaker</div>
+        <div class="project-desc">A matching game or algorithm tool built in Python, designed to pair items, people, or concepts intelligently.</div>
+        <div class="project-footer">
+          <span class="project-category">Game/Tool · matchmaker.py</span>
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="project-link">↗</a>
+        </div>
+      </div>
+
+      <!-- WEB PROJECTS -->
+      <div class="project-card" data-category="web">
+        <div class="project-top">
+          <div class="project-icon">🌍</div>
+          <span class="project-lang web">HTML/CSS/JS</span>
+        </div>
+        <div class="project-name">Codeon Africa</div>
+        <div class="project-desc">A full website built with HTML, CSS and JavaScript for Codeon Africa — featuring responsive design, modern layout and interactive elements.</div>
+        <div class="project-footer">
+          <span class="project-category">Web · Full Site</span>
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="project-link">↗</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="web">
+        <div class="project-top">
+          <div class="project-icon">🧠</div>
+          <span class="project-lang web">HTML/CSS/JS</span>
+        </div>
+        <div class="project-name">Mental Health Site</div>
+        <div class="project-desc">A compassionate web project focused on mental health awareness. Features calming design, resources, and informative content.</div>
+        <div class="project-footer">
+          <span class="project-category">Web · Awareness</span>
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="project-link">↗</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="web">
+        <div class="project-top">
+          <div class="project-icon">👩‍🍳</div>
+          <span class="project-lang web">HTML/CSS/JS</span>
+        </div>
+        <div class="project-name">Mama Gracious</div>
+        <div class="project-desc">A beautiful website created for Mama Gracious — showcasing warm design, business information and a welcoming user experience.</div>
+        <div class="project-footer">
+          <span class="project-category">Web · Business Site</span>
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="project-link">↗</a>
+        </div>
+      </div>
+
+      <!-- C PROJECTS -->
+      <div class="project-card" data-category="c">
+        <div class="project-top">
+          <div class="project-icon">🎓</div>
+          <span class="project-lang c">C</span>
+        </div>
+        <div class="project-name">Student Management</div>
+        <div class="project-desc">A complete student management system in C. Handles registration, records, grades and reporting with efficient data structures.</div>
+        <div class="project-footer">
+          <span class="project-category">System · student-management.c</span>
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="project-link">↗</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="c game">
+        <div class="project-top">
+          <div class="project-icon">❓</div>
+          <span class="project-lang c">C</span>
+        </div>
+        <div class="project-name">Guess Game</div>
+        <div class="project-desc">A number guessing game implemented in C. Features intelligent hints, attempt tracking, and difficulty levels.</div>
+        <div class="project-footer">
+          <span class="project-category">Game · guess_game.c</span>
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="project-link">↗</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="python">
+        <div class="project-top">
+          <div class="project-icon">🌟</div>
+          <span class="project-lang py">Python</span>
+        </div>
+        <div class="project-name">Starry Night</div>
+        <div class="project-desc">A mesmerizing generative art project — creates a dynamic starry night sky simulation with twinkling effects and shooting stars.</div>
+        <div class="project-footer">
+          <span class="project-category">Art · starry night.py</span>
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="project-link">↗</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- JOURNEY -->
+<section id="journey">
+  <div class="about-grid">
+    <div class="fade-up">
+      <div class="section-label">My Story</div>
+      <h2>The<br><span style="color:var(--accent2)">Journey</span><br>So Far.</h2>
+      <p style="color:var(--muted); margin-top:1rem; line-height:1.8;">Every line of code is a step forward. Here's how my story as a developer has unfolded.</p>
+    </div>
+    <div class="timeline fade-up">
+      <div class="timeline-item">
+        <div class="timeline-date">The Beginning</div>
+        <div class="timeline-title">First Steps in Python 🐍</div>
+        <div class="timeline-desc">Started the journey with Python — writing first scripts, learning logic, and building a foundation that would power dozens of future projects.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Game Phase</div>
+        <div class="timeline-title">Building Games with Pygame 🎮</div>
+        <div class="timeline-desc">Dived into game development: Balloon Shooter, Snake Game, Flappy Bird, Space Shooter, Egg Catcher. Each game taught new concepts in physics, loops, and user interaction.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Expanding</div>
+        <div class="timeline-title">HTML, CSS & JavaScript 🌐</div>
+        <div class="timeline-desc">Stepped into web development, creating real websites for Codeon Africa, Mama Gracious, and a Mental Health awareness platform. Learning how design meets code.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Systems Level</div>
+        <div class="timeline-title">Mastering C Language ⚙️</div>
+        <div class="timeline-desc">Tackled C programming, building a full Student Management System and other data-driven applications. Learning the power of low-level programming.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Now</div>
+        <div class="timeline-title">30+ Projects & Still Going 🚀</div>
+        <div class="timeline-desc">With 3 GitHub badges, 30+ projects, and growing skills — the journey continues. Every week brings new challenges and new creations.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="section-full" id="contact">
+  <div class="section-inner">
+    <div class="section-label" style="margin-bottom:0.8rem;">Get In Touch</div>
+    <h2 style="margin-bottom:3rem;">Let's <span style="color:var(--accent3)">Connect.</span></h2>
+    <div class="contact-grid">
+      <div class="contact-info fade-up">
+        <h3>I'd love to hear from you!</h3>
+        <p>Whether you want to collaborate, have a project idea, or just want to say hello — my inbox is always open. I'm especially excited about creative tech projects and opportunities to learn.</p>
+        <div class="contact-links">
+          <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="contact-link">
+            <span>⭐</span>
+            <span>github.com/K-Mirembe-Mercy</span>
+          </a>
+          <a href="#" class="contact-link">
+            <span>📍</span>
+            <span>Uganda, Africa</span>
+          </a>
+          <a href="#" class="contact-link">
+            <span>🎓</span>
+            <span>Student Developer · Always Learning</span>
+          </a>
+        </div>
+      </div>
+      <div class="contact-form fade-up">
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input type="text" class="form-input" placeholder="e.g. Jane Smith" id="formName">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" placeholder="your@email.com" id="formEmail">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Hello Mercy! I'd love to..." id="formMsg"></textarea>
+        </div>
+        <button class="btn-primary" onclick="handleSubmit()" style="width:100%; justify-content:center;" id="submitBtn">
+          Send Message ✉️
+        </button>
+        <div id="formSuccess" style="display:none; text-align:center; font-family:'Space Mono',monospace; font-size:0.8rem; color:var(--accent); padding:1rem; border:1px solid var(--border); border-radius:8px; margin-top:0.5rem;">
+          ✅ Message sent! Thanks for reaching out.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-text">
+      Built with <span>♥</span> by Kafeero Mirembe Mercy · 2025
+    </div>
+    <div class="footer-links">
+      <a href="#home">Home</a>
+      <a href="#projects">Projects</a>
+      <a href="https://github.com/K-Mirembe-Mercy/" target="_blank">GitHub</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // CURSOR
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursor.style.left = mouseX - 6 + 'px';
+    cursor.style.top = mouseY - 6 + 'px';
+  });
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.15;
+    ringY += (mouseY - ringY) * 0.15;
+    ring.style.left = ringX - 18 + 'px';
+    ring.style.top = ringY - 18 + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2)'; ring.style.transform = 'scale(1.5)'; });
+    el.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; ring.style.transform = 'scale(1)'; });
+  });
+
+  // HAMBURGER
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  });
+  function closeMobile() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // TYPING EFFECT
+  const phrases = ['Building games 🎮', 'Creating websites 🌐', 'Writing Python 🐍', 'Learning C ⚙️', 'Shipping projects 🚀'];
+  let pi = 0, ci = 0, deleting = false;
+  function type() {
+    const el = document.getElementById('typed');
+    if (!el) return;
+    const phrase = phrases[pi];
+    if (!deleting) {
+      el.textContent = phrase.slice(0, ++ci);
+      if (ci === phrase.length) { deleting = true; setTimeout(type, 1800); return; }
+    } else {
+      el.textContent = phrase.slice(0, --ci);
+      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
+    }
+    setTimeout(type, deleting ? 50 : 80);
+  }
+  type();
+
+  // SCROLL ANIMATIONS
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // COUNTER ANIMATION
+  const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const els = entry.target.querySelectorAll('[data-target]');
+        els.forEach(el => {
+          const target = +el.dataset.target;
+          let current = 0;
+          const step = target / 40;
+          const timer = setInterval(() => {
+            current = Math.min(current + step, target);
+            el.textContent = Math.floor(current) + (target === 100 ? '%' : '+');
+            if (current >= target) clearInterval(timer);
+          }, 40);
+        });
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  const statsBar = document.querySelector('.stats-bar');
+  if (statsBar) counterObserver.observe(statsBar);
+
+  // PROJECT FILTER
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.project-card').forEach(card => {
+        if (filter === 'all' || card.dataset.category.includes(filter)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  // CONTACT FORM
+  function handleSubmit() {
+    const name = document.getElementById('formName').value.trim();
+    const email = document.getElementById('formEmail').value.trim();
+    const msg = document.getElementById('formMsg').value.trim();
+    if (!name || !email || !msg) { alert('Please fill in all fields!'); return; }
+    document.getElementById('submitBtn').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+</script>
+</body>
+</html>
