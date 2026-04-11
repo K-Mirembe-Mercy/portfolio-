@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Kafeero Mirembe Mercy</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.about-hero {
+  position:relative; overflow:hidden;
+  padding: 6rem 0 4rem;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border2);
+}
+.about-hero-inner {
+  display:grid; grid-template-columns:1fr 380px; gap:5rem; align-items:center;
+  position:relative; z-index:2;
+}
+.about-hero-blob {
+  position:absolute; width:600px;height:600px; border-radius:50%;
+  filter:blur(120px); pointer-events:none;
+  background:rgba(167,139,250,0.06); top:-100px;right:-100px;
+}
+
+.page-eyebrow { margin-bottom:1rem; }
+.big-quote {
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2.2rem,5vw,4rem);
+  font-weight:800; line-height:1.1;
+  letter-spacing:-0.03em; margin-bottom:2rem;
+}
+.about-photo-wrap { position:relative; }
+.about-photo {
+  border-radius:20px; overflow:hidden;
+  border:2px solid var(--border);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+}
+.about-photo img { width:100%; display:block; }
+.about-photo-badge {
+  position:absolute; bottom:-16px; left:-16px;
+  background:var(--card); border:1px solid var(--border);
+  border-radius:12px; padding:1rem 1.4rem;
+  box-shadow:var(--glow);
+}
+.badge-num { font-family:'Syne',sans-serif; font-size:1.8rem; font-weight:800; color:var(--accent); line-height:1; }
+.badge-txt { font-family:'Space Mono',monospace; font-size:0.65rem; color:var(--muted); margin-top:0.1rem; }
+
+/* STORY SECTION */
+.story-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; margin-top:4rem; }
+.story-text p { color:var(--muted); line-height:1.9; margin-bottom:1.2rem; font-size:1rem; }
+.story-text p strong { color:var(--text); }
+.story-text p em { color:var(--accent); font-style:normal; }
+
+/* TIMELINE */
+.timeline { padding-left:1.5rem; border-left:1px solid var(--border); }
+.tl-item { position:relative; padding-bottom:2.5rem; padding-left:1.5rem; }
+.tl-item:last-child { padding-bottom:0; }
+.tl-dot {
+  position:absolute; left:-1.85rem; top:4px;
+  width:12px;height:12px; border-radius:50%;
+  background:var(--accent); box-shadow:0 0 16px rgba(124,252,138,0.6);
+}
+.tl-date { font-family:'Space Mono',monospace; font-size:0.68rem; color:var(--accent); letter-spacing:0.1em; margin-bottom:0.4rem; }
+.tl-title { font-family:'Syne',sans-serif; font-size:1.05rem; font-weight:700; margin-bottom:0.3rem; }
+.tl-desc { font-size:0.85rem; color:var(--muted); line-height:1.7; }
+
+/* FUN FACTS */
+.facts-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; }
+.fact-card { background:var(--card); border:1px solid var(--border2); border-radius:var(--radius); padding:2rem; text-align:center; transition:var(--transition); }
+.fact-card:hover { border-color:var(--border); transform:translateY(-4px); }
+.fact-emoji { font-size:2.5rem; margin-bottom:0.8rem; }
+.fact-title { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; margin-bottom:0.4rem; }
+.fact-text { font-size:0.83rem; color:var(--muted); line-height:1.65; }
+
+/* GITHUB BADGES */
+.badges-section { background:var(--bg2); border-top:1px solid var(--border2); border-bottom:1px solid var(--border2); padding:5rem 0; }
+.badges-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; }
+.badge-card {
+  background:var(--card); border:1px solid var(--border2); border-radius:var(--radius);
+  padding:2rem; text-align:center; transition:var(--transition);
+  position:relative; overflow:hidden;
+}
+.badge-card::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg,rgba(124,252,138,0.03),transparent);
+  opacity:0; transition:opacity 0.3s;
+}
+.badge-card:hover { border-color:var(--border); }
+.badge-card:hover::before { opacity:1; }
+.badge-icon { font-size:3rem; margin-bottom:1rem; }
+.badge-name { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:700; margin-bottom:0.4rem; color:var(--accent); }
+.badge-desc { font-size:0.83rem; color:var(--muted); line-height:1.65; }
+
+@media(max-width:900px){
+  .about-hero-inner { grid-template-columns:1fr; }
+  .about-photo-wrap { max-width:280px; margin:0 auto; }
+  .story-grid { grid-template-columns:1fr; }
+  .facts-grid { grid-template-columns:1fr 1fr; }
+  .badges-grid { grid-template-columns:1fr; }
+}
+@media(max-width:600px){
+  .facts-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<nav class="navbar">
+  <a class="nav-logo" href="index.html">KMM<span>.dev</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="nav-github">⭐ GitHub</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="skills.html">Skills</a><a href="contact.html">Contact</a>
+</div>
+
+<main class="page">
+  <!-- ABOUT HERO -->
+  <section class="about-hero">
+    <div class="about-hero-blob"></div>
+    <div class="grid-bg"></div>
+    <div class="container">
+      <div class="about-hero-inner">
+        <div>
+          <div class="tag page-eyebrow">About Me</div>
+          <p class="big-quote">Code is how I<br>make my <span class="accent2">ideas</span><br>come <span class="accent">alive.</span></p>
+          <p style="color:var(--muted);line-height:1.8;max-width:480px;font-size:1.05rem;">Hi! I'm <strong style="color:var(--text)">Kafeero Mirembe Mercy</strong> — a passionate student developer from Uganda who discovered the magic of programming and never looked back.</p>
+        </div>
+        <div class="about-photo-wrap fade-up">
+          <div class="about-photo">
+            <img src="photo.jpeg" alt="Kafeero Mirembe Mercy" />
+          </div>
+          <div class="about-photo-badge">
+            <div class="badge-num">3</div>
+            <div class="badge-txt">GitHub Badges 🏅</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="section">
+    <div class="container">
+      <div class="tag">My Story</div>
+      <h2 class="section-title">The Journey<br>Behind the <span class="accent">Code.</span></h2>
+      <div class="story-grid">
+        <div class="story-text fade-up">
+          <p>I started my coding journey with <strong>Python</strong> — curious, excited, and a little lost. But I kept going. Every error message was a lesson, every working program a victory.</p>
+          <p>My love for <em>games</em> drove me to build them: Balloon Shooters, Snake Games, Flappy Birds, Space Shooters, Egg Catchers — each one taught me something new about <strong>logic, loops, physics, and design</strong>.</p>
+          <p>I moved into <strong>web development</strong> — HTML, CSS, and JavaScript — and built real websites for real organizations like Codeon Africa and Mama Gracious. Seeing my work on a browser felt extraordinary.</p>
+          <p>Then came <strong>C programming</strong>: pointers, memory, structs. Challenging — but I built a complete Student Management System and more. Every hard thing I tackle makes me stronger.</p>
+          <p>Today I have <strong>30+ projects</strong>, 3 GitHub badges, and an unstoppable drive to keep learning and building. I'm just getting started.</p>
+          <div style="margin-top:2rem;">
+            <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="btn btn-green">See My GitHub →</a>
+          </div>
+        </div>
+        <div class="fade-up d1">
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-date">The Beginning</div>
+              <div class="tl-title">First Python Scripts 🐍</div>
+              <div class="tl-desc">Wrote my first programs — learning variables, loops, functions. The foundation of everything that followed.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-date">Game Phase</div>
+              <div class="tl-title">Pygame Game Development 🎮</div>
+              <div class="tl-desc">Built 10+ games: Balloon Shooter, Snake, Flappy Bird, Space Shooter, Egg Catcher, Ball Catcher, Star Pusher and more.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-date">Creative Phase</div>
+              <div class="tl-title">Art, Tools & Apps 🎨</div>
+              <div class="tl-desc">Starry Night, Kaleido-Spiral, Music Players, Password Generator, Screen Pet, Secret Messages — exploring creativity with code.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-date">Web Phase</div>
+              <div class="tl-title">HTML, CSS & JavaScript 🌐</div>
+              <div class="tl-desc">Built Codeon Africa, Mama Gracious, a Mental Health platform — real websites for real users.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-date">Systems Phase</div>
+              <div class="tl-title">C Programming ⚙️</div>
+              <div class="tl-desc">Student Management System, Guess Game, checker_two.c — tackling low-level programming with confidence.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot" style="background:var(--accent2);box-shadow:0 0 16px rgba(167,139,250,0.6)"></div>
+              <div class="tl-date">Now</div>
+              <div class="tl-title">30+ Projects & Growing 🚀</div>
+              <div class="tl-desc">3 GitHub badges, dozens of shipped projects, and an infinite drive to keep learning and building.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FUN FACTS -->
+  <section class="section-sm" style="background:var(--bg2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);">
+    <div class="container">
+      <div class="tag">Fun Facts</div>
+      <h2 class="section-title">Things you<br>should know <span class="accent3">about me.</span></h2>
+      <div class="facts-grid">
+        <div class="fact-card fade-up">
+          <div class="fact-emoji">🇺🇬</div>
+          <div class="fact-title">Proudly Ugandan</div>
+          <div class="fact-text">Based in Uganda, Africa — proving that world-class talent exists everywhere, not just in Silicon Valley.</div>
+        </div>
+        <div class="fact-card fade-up d1">
+          <div class="fact-emoji">🎮</div>
+          <div class="fact-title">Game Builder First</div>
+          <div class="fact-text">Games were my entry point to programming. Every game I built taught me problem-solving in the most fun way possible.</div>
+        </div>
+        <div class="fact-card fade-up d2">
+          <div class="fact-emoji">📚</div>
+          <div class="fact-title">Self-Taught & Proud</div>
+          <div class="fact-text">Much of what I know, I taught myself — through docs, tutorials, errors, and sheer determination to figure things out.</div>
+        </div>
+        <div class="fact-card fade-up d3">
+          <div class="fact-emoji">⚡</div>
+          <div class="fact-title">Fast Learner</div>
+          <div class="fact-text">30+ projects across 4 languages. When I find something interesting, I dive deep and build something real with it.</div>
+        </div>
+        <div class="fact-card fade-up">
+          <div class="fact-emoji">🎵</div>
+          <div class="fact-title">Built a Music Player</div>
+          <div class="fact-text">One of my favorite projects — a fully functional desktop music player with playlist management built entirely in Python.</div>
+        </div>
+        <div class="fact-card fade-up d1">
+          <div class="fact-emoji">🌱</div>
+          <div class="fact-title">Always Growing</div>
+          <div class="fact-text">Every week I'm learning something new. The journey never stops — that's what makes coding so exciting.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GITHUB BADGES -->
+  <div class="badges-section">
+    <div class="container">
+      <div class="tag">Achievements</div>
+      <h2 class="section-title">My GitHub<br><span class="accent">Badges.</span></h2>
+      <div class="badges-grid">
+        <div class="badge-card fade-up">
+          <div class="badge-icon">🏅</div>
+          <div class="badge-name">GitHub Badge #1</div>
+          <div class="badge-desc">Awarded for contributions and activity on GitHub. Every commit is a step in my developer journey.</div>
+        </div>
+        <div class="badge-card fade-up d1">
+          <div class="badge-icon">⭐</div>
+          <div class="badge-name">GitHub Badge #2</div>
+          <div class="badge-desc">Recognition for consistent open-source participation and sharing my work with the world.</div>
+        </div>
+        <div class="badge-card fade-up d2">
+          <div class="badge-icon">🚀</div>
+          <div class="badge-name">GitHub Badge #3</div>
+          <div class="badge-desc">Earned through building and shipping real projects publicly — proof that I don't just talk, I build.</div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:3rem;">
+        <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="btn btn-green">View Full GitHub Profile →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM CTA -->
+  <section class="section">
+    <div class="container" style="text-align:center;">
+      <div class="tag" style="justify-content:center;">What's Next</div>
+      <h2 class="section-title">Want to see<br>what I've <span class="accent">built?</span></h2>
+      <p style="color:var(--muted);margin:1.5rem auto 2.5rem;max-width:400px;font-size:1.05rem;">Check out my full project gallery — 30+ real projects across games, web, and systems programming.</p>
+      <a href="projects.html" class="btn btn-green">Browse All Projects →</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">Made with <span>♥</span> by Kafeero Mirembe Mercy · Uganda 🇺🇬</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a><a href="projects.html">Projects</a>
+      <a href="https://github.com/K-Mirembe-Mercy/" target="_blank">GitHub</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

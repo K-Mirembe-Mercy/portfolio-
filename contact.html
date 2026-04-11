@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Kafeero Mirembe Mercy</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.contact-hero { background:var(--bg2); border-bottom:1px solid var(--border2); padding:6rem 0 4rem; position:relative; overflow:hidden; }
+.blob-contact { position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none; }
+.bc1 { width:500px;height:500px;background:rgba(167,139,250,0.07);top:-100px;right:-100px; }
+.bc2 { width:400px;height:400px;background:rgba(244,114,182,0.05);bottom:-100px;left:-50px; }
+
+.contact-layout { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; margin-top:4rem; }
+
+/* CONTACT INFO */
+.c-info-card {
+  background:var(--card); border:1px solid var(--border2); border-radius:20px; padding:2.5rem;
+  position:sticky; top:90px;
+}
+.c-info-title { font-family:'Syne',sans-serif; font-size:1.6rem; font-weight:800; margin-bottom:0.8rem; letter-spacing:-0.02em; }
+.c-info-desc { color:var(--muted); line-height:1.8; font-size:0.95rem; margin-bottom:2rem; }
+
+.c-link {
+  display:flex; align-items:center; gap:1rem;
+  padding:1rem 1.2rem; background:var(--bg2);
+  border:1px solid var(--border2); border-radius:12px;
+  text-decoration:none; color:var(--text);
+  transition:var(--transition); margin-bottom:0.8rem;
+}
+.c-link:hover { border-color:var(--accent); color:var(--accent); transform:translateX(5px); }
+.c-link:last-of-type { margin-bottom:0; }
+.c-link-icon { font-size:1.3rem; flex-shrink:0; }
+.c-link-text { }
+.c-link-label { font-family:'Space Mono',monospace; font-size:0.65rem; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.1rem; }
+.c-link-val { font-size:0.9rem; font-weight:500; }
+
+.availability-badge {
+  display:flex; align-items:center; gap:0.8rem;
+  margin-top:2rem; padding:1rem 1.2rem;
+  background:rgba(124,252,138,0.08); border:1px solid rgba(124,252,138,0.2);
+  border-radius:12px;
+}
+.av-dot { width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(124,252,138,0.7);flex-shrink:0;animation:glow2 2s infinite; }
+@keyframes glow2{0%,100%{box-shadow:0 0 12px rgba(124,252,138,0.7)}50%{box-shadow:0 0 24px rgba(124,252,138,0.9)}}
+.av-text { font-family:'Space Mono',monospace; font-size:0.75rem; color:var(--accent); line-height:1.5; }
+.av-text strong { display:block; font-size:0.8rem; }
+
+/* FORM */
+.c-form { background:var(--card); border:1px solid var(--border2); border-radius:20px; padding:2.5rem; }
+.c-form-title { font-family:'Syne',sans-serif; font-size:1.4rem; font-weight:800; margin-bottom:0.4rem; letter-spacing:-0.02em; }
+.c-form-sub { color:var(--muted); font-size:0.88rem; margin-bottom:2rem; }
+
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.fg { display:flex; flex-direction:column; gap:0.5rem; margin-bottom:1.2rem; }
+.fl { font-family:'Space Mono',monospace; font-size:0.65rem; color:var(--muted); letter-spacing:0.12em; text-transform:uppercase; }
+.fi, .fta {
+  background:var(--bg2); border:1px solid var(--border2); border-radius:10px;
+  padding:0.9rem 1.1rem; color:var(--text); font-family:'Outfit',sans-serif;
+  font-size:0.95rem; outline:none; transition:var(--transition); resize:none;
+  width:100%;
+}
+.fi:focus, .fta:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(124,252,138,0.08); }
+.fi::placeholder, .fta::placeholder { color:var(--muted); }
+.fta { min-height:140px; }
+
+.subject-tags { display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1.5rem; }
+.s-tag {
+  font-family:'Space Mono',monospace; font-size:0.68rem;
+  padding:0.4rem 1rem; border-radius:20px;
+  border:1px solid var(--border2); background:transparent; color:var(--muted);
+  cursor:pointer; transition:var(--transition); letter-spacing:0.05em;
+}
+.s-tag.selected, .s-tag:hover { border-color:var(--accent); color:var(--accent); background:rgba(124,252,138,0.08); }
+
+.submit-btn {
+  width:100%; padding:1rem; border:none; border-radius:10px;
+  background:var(--accent); color:#080810;
+  font-family:'Space Mono',monospace; font-size:0.82rem; font-weight:700;
+  letter-spacing:0.08em; cursor:pointer; transition:var(--transition);
+  display:flex; align-items:center; justify-content:center; gap:0.6rem;
+}
+.submit-btn:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(124,252,138,0.3); }
+.submit-btn:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
+
+.success-msg {
+  display:none; text-align:center; padding:2rem;
+  background:rgba(124,252,138,0.08); border:1px solid rgba(124,252,138,0.2);
+  border-radius:12px; margin-top:1rem;
+}
+.success-msg.show { display:block; }
+.success-icon { font-size:2.5rem; margin-bottom:0.8rem; }
+.success-title { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:700; color:var(--accent); margin-bottom:0.4rem; }
+.success-sub { font-size:0.85rem; color:var(--muted); }
+
+@media(max-width:900px) {
+  .contact-layout { grid-template-columns:1fr; }
+  .c-info-card { position:static; }
+  .form-row { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<nav class="navbar">
+  <a class="nav-logo" href="index.html">KMM<span>.dev</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li><li><a href="skills.html">Skills</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="nav-github">⭐ GitHub</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="skills.html">Skills</a><a href="contact.html">Contact</a>
+</div>
+
+<main class="page">
+  <section class="contact-hero">
+    <div class="grid-bg"></div>
+    <div class="blob-contact bc1"></div>
+    <div class="blob-contact bc2"></div>
+    <div class="container" style="position:relative;z-index:2;">
+      <div class="tag">Get In Touch</div>
+      <h1 class="display">Let's<br><span class="accent2">Connect.</span></h1>
+      <p style="color:var(--muted);margin-top:1.5rem;max-width:520px;font-size:1.05rem;line-height:1.8;">Whether you have a project idea, want to collaborate, or just want to say hello — I'd love to hear from you!</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-layout">
+
+        <!-- INFO SIDEBAR -->
+        <div class="fade-up">
+          <div class="c-info-card">
+            <div class="c-info-title">Don't be a<br>stranger! 👋</div>
+            <div class="c-info-desc">I'm always excited to connect with other developers, potential collaborators, or anyone interested in my work. Reach out through any of these channels.</div>
+
+            <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="c-link">
+              <span class="c-link-icon">⭐</span>
+              <div class="c-link-text">
+                <div class="c-link-label">GitHub</div>
+                <div class="c-link-val">K-Mirembe-Mercy</div>
+              </div>
+            </a>
+            <a href="#" class="c-link">
+              <span class="c-link-icon">📍</span>
+              <div class="c-link-text">
+                <div class="c-link-label">Location</div>
+                <div class="c-link-val">Uganda, Africa 🇺🇬</div>
+              </div>
+            </a>
+            <a href="#" class="c-link">
+              <span class="c-link-icon">🎓</span>
+              <div class="c-link-text">
+                <div class="c-link-label">Status</div>
+                <div class="c-link-val">Student Developer</div>
+              </div>
+            </a>
+            <a href="#" class="c-link">
+              <span class="c-link-icon">💡</span>
+              <div class="c-link-text">
+                <div class="c-link-label">Open To</div>
+                <div class="c-link-val">Collabs & Learning</div>
+              </div>
+            </a>
+
+            <div class="availability-badge">
+              <div class="av-dot"></div>
+              <div class="av-text">
+                <strong>Available for Collaboration</strong>
+                Always happy to work on exciting projects!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORM -->
+        <div class="fade-up d1">
+          <div class="c-form">
+            <div class="c-form-title">Send a Message</div>
+            <div class="c-form-sub">I usually respond within 24 hours.</div>
+
+            <div>
+              <div class="fl" style="margin-bottom:0.6rem;">What's this about?</div>
+              <div class="subject-tags">
+                <button class="s-tag" onclick="selectTag(this)">👋 Just saying hi</button>
+                <button class="s-tag" onclick="selectTag(this)">🤝 Collaboration</button>
+                <button class="s-tag" onclick="selectTag(this)">💼 Opportunity</button>
+                <button class="s-tag" onclick="selectTag(this)">💬 Feedback</button>
+                <button class="s-tag" onclick="selectTag(this)">🚀 Project Idea</button>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="fg">
+                <label class="fl">First Name</label>
+                <input type="text" class="fi" placeholder="Jane" id="fname">
+              </div>
+              <div class="fg">
+                <label class="fl">Last Name</label>
+                <input type="text" class="fi" placeholder="Smith" id="lname">
+              </div>
+            </div>
+
+            <div class="fg">
+              <label class="fl">Email Address</label>
+              <input type="email" class="fi" placeholder="your@email.com" id="femail">
+            </div>
+
+            <div class="fg">
+              <label class="fl">Your Message</label>
+              <textarea class="fta" placeholder="Hi Mercy! I'd love to connect because..." id="fmsg"></textarea>
+            </div>
+
+            <button class="submit-btn" onclick="sendMsg()" id="sendBtn">
+              Send Message ✉️
+            </button>
+
+            <div class="success-msg" id="successMsg">
+              <div class="success-icon">🎉</div>
+              <div class="success-title">Message Sent!</div>
+              <div class="success-sub">Thanks for reaching out! I'll get back to you soon.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section-sm" style="background:var(--bg2);border-top:1px solid var(--border2);">
+    <div class="container">
+      <div class="tag">Common Questions</div>
+      <h2 class="section-title" style="margin-bottom:3rem;">Quick <span class="accent">Answers.</span></h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+        <div style="background:var(--card);border:1px solid var(--border2);border-radius:var(--radius);padding:1.8rem;" class="fade-up">
+          <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.6rem;">Are you open to collaborations?</div>
+          <div style="font-size:0.85rem;color:var(--muted);line-height:1.7;">Absolutely! I love working with other developers, especially on creative or educational projects. Don't hesitate to reach out.</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border2);border-radius:var(--radius);padding:1.8rem;" class="fade-up d1">
+          <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.6rem;">Can you build a website for me?</div>
+          <div style="font-size:0.85rem;color:var(--muted);line-height:1.7;">Yes! I build websites with HTML, CSS, and JavaScript. Let's talk about what you need and see how I can help.</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border2);border-radius:var(--radius);padding:1.8rem;" class="fade-up d2">
+          <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.6rem;">How fast do you respond?</div>
+          <div style="font-size:0.85rem;color:var(--muted);line-height:1.7;">I try to respond within 24 hours. I'm a student, so responses may occasionally take a bit longer, but I always get back to people.</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border2);border-radius:var(--radius);padding:1.8rem;" class="fade-up d3">
+          <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.6rem;">Where can I see your code?</div>
+          <div style="font-size:0.85rem;color:var(--muted);line-height:1.7;">All my projects are on GitHub at <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" style="color:var(--accent);text-decoration:none;">K-Mirembe-Mercy</a>. Feel free to explore and star what you like!</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">Made with <span>♥</span> by Kafeero Mirembe Mercy · Uganda 🇺🇬</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a><a href="projects.html">Projects</a>
+      <a href="https://github.com/K-Mirembe-Mercy/" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+function selectTag(el) {
+  document.querySelectorAll('.s-tag').forEach(t => t.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function sendMsg() {
+  const f = document.getElementById('fname').value.trim();
+  const e = document.getElementById('femail').value.trim();
+  const m = document.getElementById('fmsg').value.trim();
+  if (!f || !e || !m) { alert('Please fill in your name, email, and message!'); return; }
+  const btn = document.getElementById('sendBtn');
+  btn.textContent = 'Sending...'; btn.disabled = true;
+  setTimeout(() => {
+    btn.style.display = 'none';
+    document.getElementById('successMsg').classList.add('show');
+  }, 1200);
+}
+</script>
+</body>
+</html>
