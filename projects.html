@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Kafeero Mirembe Mercy</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.ph{background:var(--bg2);border-bottom:1px solid var(--bord);padding:6rem 0 4rem;position:relative;overflow:hidden;}
+.ph-blob{position:absolute;border-radius:50%;filter:blur(110px);pointer-events:none;}
+.phb1{width:600px;height:600px;background:rgba(124,252,138,.06);top:-150px;right:-100px;}
+.phb2{width:400px;height:400px;background:rgba(244,114,182,.05);bottom:-100px;left:-50px;}
+.ph-num{position:absolute;top:2rem;right:2rem;font-family:'Syne',sans-serif;font-size:10rem;font-weight:800;color:rgba(124,252,138,.05);line-height:1;letter-spacing:-.05em;pointer-events:none;}
+/* FILTERS */
+.fb{display:flex;gap:.5rem;flex-wrap:wrap;margin:3rem 0 0;padding-bottom:2rem;border-bottom:1px solid var(--bord);}
+.fbt{font-family:'Space Mono',monospace;font-size:.7rem;padding:.45rem 1.1rem;border-radius:20px;border:1px solid var(--bord);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;letter-spacing:.04em;}
+.fbt:hover,.fbt.on{border-color:var(--green);color:var(--green);background:rgba(124,252,138,.07);}
+.fbt.on{font-weight:700;}
+/* GRID */
+.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;margin-top:2.5rem;}
+.pc{background:var(--card);border:1px solid var(--bord);border-radius:16px;padding:2rem;transition:all .3s;position:relative;overflow:hidden;}
+.pc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),var(--purple));transform:scaleX(0);transform-origin:left;transition:transform .4s ease;}
+.pc:hover{border-color:rgba(124,252,138,.3);transform:translateY(-5px);box-shadow:var(--glow);}
+.pc:hover::before{transform:scaleX(1);}
+.pc.hide{display:none;}
+.pc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.2rem;}
+.pc-ico{font-size:2.2rem;line-height:1;}
+.pc-arr{color:var(--muted);font-size:1.1rem;transition:.3s;text-decoration:none;display:inline-block;}
+.pc:hover .pc-arr{color:var(--green);transform:translate(3px,-3px);}
+.pc-name{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin:.5rem 0;letter-spacing:-.02em;}
+.pc-desc{font-size:.84rem;color:var(--muted);line-height:1.65;margin-bottom:1.2rem;}
+.pc-foot{display:flex;justify-content:space-between;align-items:center;padding-top:1rem;border-top:1px solid var(--bord);}
+.pc-cat{font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);}
+.nb{display:inline-block;font-family:'Space Mono',monospace;font-size:.58rem;color:var(--pink);background:rgba(244,114,182,.1);border:1px solid rgba(244,114,182,.2);padding:.12rem .5rem;border-radius:20px;margin-left:.4rem;vertical-align:middle;}
+.emp{text-align:center;padding:5rem 2rem;display:none;}
+.emp.show{display:block;}
+.emp p{color:var(--muted);font-family:'Space Mono',monospace;font-size:.85rem;}
+@media(max-width:700px){.pg{grid-template-columns:1fr;}}
+</style>
+</head>
+<body class="page">
+<div id="cur"></div><div id="curR"></div>
+<nav id="navbar">
+  <a class="logo" href="index.html">KMM<span>.dev</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="gh-btn">⭐ GitHub</a>
+    <button class="ham" id="ham" onclick="toggleMenu()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <button onclick="closeMenu()" style="position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:var(--muted);font-size:2rem;cursor:pointer;">✕</button>
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="projects.html" onclick="closeMenu()">Projects</a>
+  <a href="skills.html" onclick="closeMenu()">Skills</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+</div>
+<main>
+<section class="ph">
+  <div class="gbg"></div>
+  <div class="ph-blob phb1"></div><div class="ph-blob phb2"></div>
+  <div class="ph-num">30+</div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="tag">My Work</div>
+    <h1 style="font-family:'Syne',sans-serif;font-size:clamp(3rem,8vw,6rem);font-weight:800;line-height:.95;letter-spacing:-.04em;">Everything<br>I've <span class="gr">Built.</span></h1>
+    <p style="color:var(--muted);margin-top:1.5rem;max-width:520px;font-size:1.05rem;line-height:1.8;">From Python arcade games to C management systems, web platforms to generative art — every project here is something I actually built, ran, and learned from deeply.</p>
+    <div class="fb">
+      <button class="fbt on" data-f="all">All Projects (30+)</button>
+      <button class="fbt" data-f="game">🎮 Games</button>
+      <button class="fbt" data-f="python">🐍 Python</button>
+      <button class="fbt" data-f="web">🌐 Web</button>
+      <button class="fbt" data-f="c">⚙️ C Language</button>
+      <button class="fbt" data-f="art">🎨 Creative</button>
+      <button class="fbt" data-f="tool">🔧 Tools</button>
+      <button class="fbt" data-f="recent">✨ Recent</button>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="container">
+    <div class="pg" id="pg">
+      <div class="pc" data-tags="game python"><div class="pc-top"><div class="pc-ico">🎈</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Balloon Shooter</div><div class="pc-desc">Arcade-style game where you shoot flying balloons before time runs out. Features collision detection, score tracking, and increasing speed — built with Pygame.</div><div class="pc-foot"><span class="pc-cat">Game · Pygame</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="game python"><div class="pc-top"><div class="pc-ico">🐍</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Snake Game</div><div class="pc-desc">Classic snake game reimagined — smooth movement, a growing snake, food spawning, and a game-over screen. Difficulty increases as your score rises.</div><div class="pc-foot"><span class="pc-cat">Game · Pygame</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="game python"><div class="pc-top"><div class="pc-ico">🪙</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Coin Collector</div><div class="pc-desc">Navigate and collect coins in this fast-paced Pygame experience. Features combo mechanics, a timer, and a high-score tracking system.</div><div class="pc-foot"><span class="pc-cat">Game · Gamefied</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="game python"><div class="pc-top"><div class="pc-ico">🏀</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Ball Catcher</div><div class="pc-desc">Balls fall from the top — catch them before they hit the ground! A quick reflex game with smooth animations and escalating drop speed.</div><div class="pc-foot"><span class="pc-cat">Game · ball-catcher.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="game python"><div class="pc-top"><div class="pc-ico">🐦</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Flappy Bird Clone</div><div class="pc-desc">Full recreation of Flappy Bird in Python — physics-based flight, procedurally generated pipes, collision detection and score tracking. Built from scratch.</div><div class="pc-foot"><span class="pc-cat">Game · flappy_bird.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="game python"><div class="pc-top"><div class="pc-ico">🚀</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Space Shooter</div><div class="pc-desc">Defend the galaxy from alien invasion in this top-down space shooter. Features enemy waves, projectile systems, explosions, and a lives system.</div><div class="pc-foot"><span class="pc-cat">Game · spaceShooter.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="game python"><div class="pc-top"><div class="pc-ico">🥚</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Egg Catcher</div><div class="pc-desc">Eggs rain down from the sky and you must catch them in your basket before they smash. The drop rate increases over time for maximum challenge.</div><div class="pc-foot"><span class="pc-cat">Game · egg_catcher.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="game python"><div class="pc-top"><div class="pc-ico">📦</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Star Pusher</div><div class="pc-desc">A puzzle game inspired by Sokoban mechanics — push stars onto target squares using clever moves. Multiple levels with increasing complexity.</div><div class="pc-foot"><span class="pc-cat">Game · star pusher.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="game python"><div class="pc-top"><div class="pc-ico">🐛</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Caterpillar</div><div class="pc-desc">Control a caterpillar navigating the world, eating food, and growing longer. Features segment-based body movement and obstacle avoidance.</div><div class="pc-foot"><span class="pc-cat">Game · caterpillar.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="game python"><div class="pc-top"><div class="pc-ico">🧩</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Matchmaker</div><div class="pc-desc">A matching puzzle game — find and connect pairs before time runs out. Clean Pygame UI with satisfying match animations and score multipliers.</div><div class="pc-foot"><span class="pc-cat">Game · matchmaker.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="tool python recent"><div class="pc-top"><div class="pc-ico">🎵</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Music Player <span class="nb">Recent</span></div><div class="pc-desc">A fully functional desktop music player with playlist management, play/pause/skip controls, volume slider, and a clean Tkinter GUI interface.</div><div class="pc-foot"><span class="pc-cat">Tool · Music_Player.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="tool python recent"><div class="pc-top"><div class="pc-ico">🔑</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Password Generator <span class="nb">Recent</span></div><div class="pc-desc">Generates cryptographically strong passwords with customizable length, uppercase, numbers, and symbols. Copy to clipboard with one click.</div><div class="pc-foot"><span class="pc-cat">Tool · password_generator.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="tool python recent"><div class="pc-top"><div class="pc-ico">⏳</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Countdown Calendar <span class="nb">Recent</span></div><div class="pc-desc">Track important upcoming events with precise day-by-day countdowns. Add multiple dates and see exactly how much time remains.</div><div class="pc-foot"><span class="pc-cat">Tool · countdown calendar.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="tool python recent"><div class="pc-top"><div class="pc-ico">🧮</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Calculator <span class="nb">Recent</span></div><div class="pc-desc">A clean GUI calculator built with Tkinter — supports basic operations, decimal numbers, and keyboard input with a professional display.</div><div class="pc-foot"><span class="pc-cat">Tool · calculator.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="tool python recent"><div class="pc-top"><div class="pc-ico">🔐</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Secret Messages <span class="nb">Recent</span></div><div class="pc-desc">Encrypt and decrypt hidden messages using Caesar cipher and other algorithms. Send secret communications and decode mysteries.</div><div class="pc-foot"><span class="pc-cat">Tool · secret messages.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="tool python"><div class="pc-top"><div class="pc-ico">❓</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Ask the Expert</div><div class="pc-desc">An interactive Q&amp;A system in Python — ask questions and receive guided, expert-style answers on various topics.</div><div class="pc-foot"><span class="pc-cat">Tool · Ask the expert.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="tool python"><div class="pc-top"><div class="pc-ico">📔</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Learning Log</div><div class="pc-desc">Track what you're studying with this Python app. Log topics, add notes, mark things complete, and review your learning progress over time.</div><div class="pc-foot"><span class="pc-cat">Tool · learning_log.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="tool python"><div class="pc-top"><div class="pc-ico">👤</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Student Profile</div><div class="pc-desc">Create and manage student profiles in Python — store names, grades, courses, and personal info in an organized, searchable interface.</div><div class="pc-foot"><span class="pc-cat">Tool · Student_profile.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="art python recent"><div class="pc-top"><div class="pc-ico">🌈</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Mutant Rainbow <span class="nb">Recent</span></div><div class="pc-desc">Generative art that creates beautiful, ever-changing rainbow patterns using Python turtle graphics. Each run produces a uniquely mesmerizing result.</div><div class="pc-foot"><span class="pc-cat">Art · Muntant Rainbow.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="art python recent"><div class="pc-top"><div class="pc-ico">🌟</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Starry Night <span class="nb">Recent</span></div><div class="pc-desc">A living, breathing starry night sky — twinkling stars appear, shooting stars streak across the screen, and the atmosphere shifts in real time.</div><div class="pc-foot"><span class="pc-cat">Art · starry night.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="art python recent"><div class="pc-top"><div class="pc-ico">🌀</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Kaleido-Spiral <span class="nb">Recent</span></div><div class="pc-desc">Mathematically precise kaleidoscopic spiral patterns generated with Python turtle. Where algorithms meet visual art in hypnotic form.</div><div class="pc-foot"><span class="pc-cat">Art · kaleido-spiral.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="art python recent"><div class="pc-top"><div class="pc-ico">🐾</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Screen Pet <span class="nb">Recent</span></div><div class="pc-desc">Your own virtual companion that lives on your desktop! Feed it, play with it, and watch it respond with cute animations and expressions.</div><div class="pc-foot"><span class="pc-cat">Creative · screen pet.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="art python recent"><div class="pc-top"><div class="pc-ico">😴</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Sleeping Dragons <span class="nb">Recent</span></div><div class="pc-desc">A peaceful animated scene of slumbering dragons — creative storytelling through Python graphics and careful animation programming.</div><div class="pc-foot"><span class="pc-cat">Creative · sleeping dragons.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="art python recent"><div class="pc-top"><div class="pc-ico">🤖</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Robot Builder <span class="nb">Recent</span></div><div class="pc-desc">Interactively design and configure virtual robots with different parts and behaviors. A creative exploration of component-based design in Python.</div><div class="pc-foot"><span class="pc-cat">Creative · robot builder.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="art python recent"><div class="pc-top"><div class="pc-ico">📸</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Snap <span class="nb">Recent</span></div><div class="pc-desc">A Python camera application for capturing and displaying screenshots or webcam photos with a clean interface.</div><div class="pc-foot"><span class="pc-cat">Tool · Snap.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="web"><div class="pc-top"><div class="pc-ico">🌍</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lweb">HTML/CSS/JS</span><div class="pc-name">Codeon Africa</div><div class="pc-desc">A full responsive website for Codeon Africa. Features modern layout, interactive navigation, animated sections, and polished professional design.</div><div class="pc-foot"><span class="pc-cat">Web · Full Site</span><span class="lt lweb">Web</span></div></div>
+
+      <div class="pc" data-tags="web"><div class="pc-top"><div class="pc-ico">🧠</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lweb">HTML/CSS/JS</span><div class="pc-name">Mental Health Platform</div><div class="pc-desc">A compassionate website for mental health awareness — calming color palette, helpful resources, informative articles, and a clean, friendly layout.</div><div class="pc-foot"><span class="pc-cat">Web · Awareness</span><span class="lt lweb">Web</span></div></div>
+
+      <div class="pc" data-tags="web"><div class="pc-top"><div class="pc-ico">👩‍🍳</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lweb">HTML/CSS/JS</span><div class="pc-name">Mama Gracious</div><div class="pc-desc">A warm, professional business website for Mama Gracious — welcoming design, clear service information, and an easy-to-navigate layout.</div><div class="pc-foot"><span class="pc-cat">Web · Business</span><span class="lt lweb">Web</span></div></div>
+
+      <div class="pc" data-tags="c"><div class="pc-top"><div class="pc-ico">🎓</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lc">C</span><div class="pc-name">Student Management System</div><div class="pc-desc">A complete C program for managing student records — add, view, search, and update records using structs, arrays, and file I/O operations.</div><div class="pc-foot"><span class="pc-cat">System · student-management.c</span><span class="lt lc">C</span></div></div>
+
+      <div class="pc" data-tags="c game"><div class="pc-top"><div class="pc-ico">❓</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lc">C</span><div class="pc-name">Guess Game (C)</div><div class="pc-desc">A number guessing game implemented in C — intelligent too-high/too-low hints, attempt counting, and adjustable difficulty ranges.</div><div class="pc-foot"><span class="pc-cat">Game · guess_game.c</span><span class="lt lc">C</span></div></div>
+
+      <div class="pc" data-tags="c tool"><div class="pc-top"><div class="pc-ico">✅</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lc">C</span><div class="pc-name">Checker Two</div><div class="pc-desc">A validation program in C that verifies and checks data against multiple conditions — efficient logic with clean terminal output.</div><div class="pc-foot"><span class="pc-cat">Tool · checker_two.c</span><span class="lt lc">C</span></div></div>
+
+      <div class="pc" data-tags="python tool"><div class="pc-top"><div class="pc-ico">📦</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Containers</div><div class="pc-desc">A Python project exploring container data structures — lists, dictionaries, sets — with practical operations and interactive demos.</div><div class="pc-foot"><span class="pc-cat">Tool · containers.py</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="python tool"><div class="pc-top"><div class="pc-ico">🍾</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Bottle Filling</div><div class="pc-desc">A Python simulation or game about filling bottles — logic-driven gameplay with visual progress indicators and level completion.</div><div class="pc-foot"><span class="pc-cat">Game/Tool · Bottle-filling</span><span class="lt lpy">Python</span></div></div>
+
+      <div class="pc" data-tags="python tool"><div class="pc-top"><div class="pc-ico">🎼</div><a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="pc-arr">↗</a></div><span class="lt lpy">Python</span><div class="pc-name">Muzik</div><div class="pc-desc">A music-related Python tool — either a player, visualizer, or generator that works with audio files and brings music to life through code.</div><div class="pc-foot"><span class="pc-cat">Tool · muzik.py</span><span class="lt lpy">Python</span></div></div>
+    </div>
+
+    <div class="emp" id="emp"><p>No projects in this category yet — but more are being built every week! 🚀</p></div>
+
+    <div style="text-align:center;margin-top:5rem;padding-top:3rem;border-top:1px solid var(--bord);">
+      <p style="color:var(--muted);font-family:'Space Mono',monospace;font-size:.8rem;margin-bottom:1.5rem;">...and more being added every week</p>
+      <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="btn-g">See All on GitHub →</a>
+    </div>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="foot-inner">
+    <div class="foot-left">Made with <span>♥</span> by Kafeero Mirembe Mercy &nbsp;·&nbsp; Uganda 🇺🇬</div>
+    <div class="foot-links">
+      <a href="index.html">Home</a><a href="about.html">About</a>
+      <a href="projects.html">Projects</a><a href="skills.html">Skills</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://github.com/K-Mirembe-Mercy/" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+<script>
+// CURSOR
+(function(){
+  var d=document.getElementById('cur'),r=document.getElementById('curR');
+  if(!d||!r)return;
+  var mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;d.style.left=mx+'px';d.style.top=my+'px';});
+  function loop(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(loop);}
+  loop();
+  document.querySelectorAll('a,button').forEach(function(el){
+    el.addEventListener('mouseenter',function(){d.style.transform='translate(-50%,-50%) scale(2.5)';r.style.transform='translate(-50%,-50%) scale(1.4)';});
+    el.addEventListener('mouseleave',function(){d.style.transform='translate(-50%,-50%) scale(1)';r.style.transform='translate(-50%,-50%) scale(1)';});
+  });
+})();
+// MOBILE MENU
+function toggleMenu(){
+  var m=document.getElementById('mobMenu'),h=document.getElementById('ham');
+  var open=!m.classList.contains('open');
+  if(open){m.classList.add('open');h.classList.add('open');document.body.style.overflow='hidden';}
+  else{m.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';}
+}
+function closeMenu(){
+  var m=document.getElementById('mobMenu'),h=document.getElementById('ham');
+  m.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';
+}
+// FADE UP
+(function(){
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('vis');},i*80);}});
+  },{threshold:0.08});
+  document.querySelectorAll('.fu').forEach(function(el){obs.observe(el);});
+})();
+// ACTIVE LINK
+(function(){
+  var p=window.location.pathname.split('/').pop()||'index.html';
+  document.querySelectorAll('.nav-links a').forEach(function(a){if(a.getAttribute('href')===p)a.classList.add('act');});
+})();
+</script>
+<script>
+document.querySelectorAll('.fbt').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.fbt').forEach(function(b){b.classList.remove('on');});
+    btn.classList.add('on');
+    var f=btn.dataset.f, vis=0;
+    document.querySelectorAll('.pc').forEach(function(card){
+      var tags=card.dataset.tags||'';
+      var show=f==='all'||tags.includes(f)||(f==='recent'&&card.querySelector('.nb'));
+      card.classList.toggle('hide',!show);
+      if(show)vis++;
+    });
+    document.getElementById('emp').classList.toggle('show',vis===0);
+  });
+});
+</script>
+</body></html>

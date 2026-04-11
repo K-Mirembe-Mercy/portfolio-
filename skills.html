@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills — Kafeero Mirembe Mercy</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.sh{background:var(--bg2);border-bottom:1px solid var(--bord);padding:6rem 0 4rem;position:relative;overflow:hidden;}
+.shb{position:absolute;border-radius:50%;filter:blur(110px);pointer-events:none;}
+.shb1{width:600px;height:600px;background:rgba(244,114,182,.07);top:-150px;right:-100px;}
+.shb2{width:400px;height:400px;background:rgba(124,252,138,.05);bottom:-100px;left:-50px;}
+/* LANG CARDS */
+.lc-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:4rem;}
+.lc{background:var(--card);border:1px solid var(--bord);border-radius:20px;padding:2.5rem;position:relative;overflow:hidden;transition:all .3s;}
+.lc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:20px 20px 0 0;}
+.lc.py::before{background:linear-gradient(90deg,#60a5fa,#3b82f6);}
+.lc.web::before{background:linear-gradient(90deg,var(--purple),#7c3aed);}
+.lc.c::before{background:linear-gradient(90deg,var(--pink),#e11d48);}
+.lc.gen::before{background:linear-gradient(90deg,var(--green),#16a34a);}
+.lc:hover{transform:translateY(-5px);}
+.lc:hover.py{border-color:rgba(96,165,250,.35);box-shadow:0 0 40px rgba(96,165,250,.1);}
+.lc:hover.web{border-color:rgba(167,139,250,.35);box-shadow:0 0 40px rgba(167,139,250,.1);}
+.lc:hover.c{border-color:rgba(244,114,182,.35);box-shadow:0 0 40px rgba(244,114,182,.1);}
+.lc:hover.gen{border-color:rgba(124,252,138,.35);box-shadow:var(--glow);}
+.lc-hd{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;}
+.lc-ico{font-size:2.8rem;line-height:1;}
+.lc-name{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:-.02em;}
+.lc-lv{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.08em;margin-top:.2rem;}
+.py .lc-lv{color:#60a5fa;} .web .lc-lv{color:var(--purple);} .c .lc-lv{color:var(--pink);} .gen .lc-lv{color:var(--green);}
+/* SKILL BARS */
+.sb{margin-bottom:1rem;}
+.sb-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;}
+.sb-n{font-size:.83rem;color:var(--text);}
+.sb-p{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--muted);}
+.sb-track{height:4px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden;}
+.sb-fill{height:100%;border-radius:4px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1);}
+.py .sb-fill{background:linear-gradient(90deg,#60a5fa,#3b82f6);}
+.web .sb-fill{background:linear-gradient(90deg,var(--purple),#7c3aed);}
+.c .sb-fill{background:linear-gradient(90deg,var(--pink),#e11d48);}
+.gen .sb-fill{background:linear-gradient(90deg,var(--green),#16a34a);}
+.lc-proj{margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid var(--bord);}
+.lc-pl{font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem;}
+.lc-pts{display:flex;flex-wrap:wrap;gap:.4rem;}
+.lc-pt{font-family:'Space Mono',monospace;font-size:.62rem;padding:.2rem .7rem;border-radius:20px;border:1px solid var(--bord);color:var(--muted);background:var(--card2);}
+/* WHAT I BUILD */
+.bld-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.bc{background:var(--card);border:1px solid var(--bord);border-radius:16px;padding:2rem;text-align:center;transition:all .3s;}
+.bc:hover{border-color:var(--gbord);transform:translateY(-4px);}
+.bc-em{font-size:2.5rem;margin-bottom:1rem;}
+.bc-t{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.4rem;}
+.bc-d{font-size:.82rem;color:var(--muted);line-height:1.7;}
+/* LEARNING NOW */
+.lrn-sec{background:var(--bg2);border-top:1px solid var(--bord);border-bottom:1px solid var(--bord);padding:5rem 0;}
+.lrn-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem;}
+.lrc{background:var(--card);border:1px solid var(--bord);border-radius:16px;padding:1.8rem;transition:all .3s;position:relative;}
+.lrc:hover{border-color:var(--gbord);transform:translateY(-3px);}
+.lrc-dot{position:absolute;top:1.2rem;right:1.2rem;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px rgba(124,252,138,.7);animation:glow 2s infinite;}
+@keyframes glow{0%,100%{box-shadow:0 0 10px rgba(124,252,138,.7)}50%{box-shadow:0 0 20px rgba(124,252,138,.9)}}
+.lrc-ico{font-size:2rem;margin-bottom:.8rem;}
+.lrc-n{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.3rem;}
+.lrc-d{font-size:.8rem;color:var(--muted);line-height:1.65;}
+/* COMPARE TABLE */
+.cmp-wrap{margin-top:3rem;overflow-x:auto;}
+table.cmp{width:100%;border-collapse:collapse;font-size:.85rem;}
+table.cmp th{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;padding:.8rem 1rem;text-align:left;border-bottom:1px solid var(--bord);}
+table.cmp td{padding:.9rem 1rem;border-bottom:1px solid var(--bord);color:var(--text);}
+table.cmp tr:last-child td{border-bottom:none;}
+table.cmp tr:hover td{background:rgba(255,255,255,.02);}
+table.cmp td:first-child{font-family:'Space Mono',monospace;font-size:.78rem;color:var(--muted);}
+.ck{color:var(--green);font-size:1rem;}
+.cx{color:var(--muted);font-size:.9rem;}
+@media(max-width:900px){.lc-grid{grid-template-columns:1fr;}.bld-grid{grid-template-columns:1fr 1fr;}.lrn-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.bld-grid{grid-template-columns:1fr;}.lrn-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body class="page">
+<div id="cur"></div><div id="curR"></div>
+<nav id="navbar">
+  <a class="logo" href="index.html">KMM<span>.dev</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://github.com/K-Mirembe-Mercy/" target="_blank" class="gh-btn">⭐ GitHub</a>
+    <button class="ham" id="ham" onclick="toggleMenu()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <button onclick="closeMenu()" style="position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:var(--muted);font-size:2rem;cursor:pointer;">✕</button>
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="projects.html" onclick="closeMenu()">Projects</a>
+  <a href="skills.html" onclick="closeMenu()">Skills</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+</div>
+<main>
+<section class="sh">
+  <div class="gbg"></div>
+  <div class="shb shb1"></div><div class="shb shb2"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="tag">Technical Skills</div>
+    <h1 style="font-family:'Syne',sans-serif;font-size:clamp(3rem,8vw,6rem);font-weight:800;line-height:.95;letter-spacing:-.04em;">My<br><span class="pk">Toolkit.</span></h1>
+    <p style="color:var(--muted);margin-top:1.5rem;max-width:540px;font-size:1.05rem;line-height:1.85;">Four languages, 30+ real projects, and a mindset that treats every new technology as an adventure worth diving into headfirst.</p>
+  </div>
+</section>
+
+<!-- LANG CARDS -->
+<section class="sec">
+  <div class="container">
+    <div class="tag">Languages</div>
+    <h2 class="st">What I <span class="gr">Know.</span></h2>
+    <div class="lc-grid">
+      <div class="lc py fu">
+        <div class="lc-hd"><div class="lc-ico">🐍</div><div><div class="lc-name">Python</div><div class="lc-lv">Primary Language · Most Experience</div></div></div>
+        <div class="sb"><div class="sb-row"><span class="sb-n">Pygame (Games)</span><span class="sb-p">90%</span></div><div class="sb-track"><div class="sb-fill" data-w="90"></div></div></div>
+        <div class="sb"><div class="sb-row"><span class="sb-n">Turtle Graphics &amp; Art</span><span class="sb-p">88%</span></div><div class="sb-track"><div class="sb-fill" data-w="88"></div></div></div>
+        <div class="sb"><div class="sb-row"><span class="sb-n">GUI Apps (Tkinter)</span><span class="sb-p">80%</span></div><div class="sb-track"><div class="sb-fill" data-w="80"></div></div></div>
+        <div class="sb"><div class="sb-row"><span class="sb-n">Logic &amp; Algorithms</span><span class="sb-p">85%</span></div><div class="sb-track"><div class="sb-fill" data-w="85"></div></div></div>
+        <div class="lc-proj"><div class="lc-pl">Built with Python</div><div class="lc-pts"><span class="lc-pt">Balloon Shooter</span><span class="lc-pt">Snake Game</span><span class="lc-pt">Music Player</span><span class="lc-pt">Flappy Bird</span><span class="lc-pt">Space Shooter</span><span class="lc-pt">Starry Night</span><span class="lc-pt">+20 more</span></div></div>
+      </div>
+
+      <div class="lc web fu d1">
+        <div class="lc-hd"><div class="lc-ico">🌐</div><div><div class="lc-name">HTML · CSS · JS</div><div class="lc-lv">Web Development · Growing Fast</div></div></div>
+        <div class="sb"><div class="sb-row"><span class="sb-n">HTML Structure</span><span class="sb-p">85%</span></div><div class="sb-track"><div class="sb-fill" data-w="85"></div></div></div>
+        <div class="sb"><div class="sb-row"><span class="sb-n">CSS Styling &amp; Layout</span><span class="sb-p">82%</span></div><div class="sb-track"><div class="sb-fill" data-w="82"></div></div></div>
+        <div class="sb"><div class="sb-row"><span class="sb-n">Responsive Design</span><span class="sb-p">78%</span></div><div class="sb-track"><div class="sb-fill" data-w="78"></div></div></div>
+        <div class="sb"><div class="sb-row"><span class="sb-n">JavaScript</span><span class="sb-p">65%</span></div><div class="sb-track"><div class="sb-fill" data-w="65"></div></div></div>
+        <div class="lc-proj"><div class="lc-pl">Built with Web Tech</div><div class="lc-pts"><span class="lc-pt">Codeon Africa</span><span class="lc-pt">Mental Health Site</span><span class="lc-pt">Mama Gracious</span></div></div>
+      </div>
+
+      <div class="lc c fu d2">
+        <div class="lc-hd"><div class="lc-ico">⚙️</div><div><div class="lc-name">C Language</div><div class="lc-lv">Systems Programming · Learning</div></div></div>
+        <div class="sb"><div class="sb-row"><span class="sb-n">Functions &amp; Logic</span><span class="sb-p">78%</span></div><div class="sb-track"><div class="sb-fill" data-w="78"></div></div></div>
+        <div class="sb"><div class="sb-row"><span class="sb-n">Structs &amp; Arrays</span><span class="sb-p">75%</span></div><div class="sb-track"><div class="sb-fill" data-w="75"></div></div></div>
+        <div class="sb"><div class="sb-row"><span class="sb-n">File I/O</span><span class="sb-p">68%</span></div><div class="sb-track"><div class="sb-fill" data-w="68"></div></div></div>
+        <div class="sb"><div class="sb-row"><span class="sb-n">Pointers &amp; Memory</span><span class="sb-p">55%</span></div><div class="sb-track"><div class="sb-fill" data-w="55"></div></div></div>
+        <div class="lc-proj"><div class="lc-pl">Built with C</div><div class="lc-pts"><span class="lc-pt">Student Management</span><span class="lc-pt">Guess Game</span><span class="lc-pt">Checker Two</span></div></div>
+      </div>
+
+      <div class="lc gen fu d3">
+        <div class="lc-hd"><div class="lc-ico">🧠</div><div><div class="lc-name">Developer Mindset</div><div class="lc-lv">General Skills · Always Leveling Up</div></div></div>
+        <div class="sb"><div class="sb-row"><span class="sb-n">Problem Solving</span><span class="sb-p">90%</span></div><div class="sb-track"><div class="sb-fill" data-w="90"></div></div></div>
+        <div class="sb"><div class="sb-row"><span class="sb-n">Game Design Logic</span><span class="sb-p">87%</span></div><div class="sb-track"><div class="sb-fill" data-w="87"></div></div></div>
+        <div class="sb"><div class="sb-row"><span class="sb-n">Git &amp; GitHub</span><span class="sb-p">73%</span></div><div class="sb-track"><div class="sb-fill" data-w="73"></div></div></div>
+        <div class="sb"><div class="sb-row"><span class="sb-n">UI/UX Thinking</span><span class="sb-p">70%</span></div><div class="sb-track"><div class="sb-fill" data-w="70"></div></div></div>
+        <div class="lc-proj"><div class="lc-pl">Applied Across</div><div class="lc-pts"><span class="lc-pt">All 30+ Projects</span><span class="lc-pt">3 GitHub Badges</span><span class="lc-pt">Ongoing</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT I BUILD -->
+<div style="background:var(--bg2);border-top:1px solid var(--bord);border-bottom:1px solid var(--bord);padding:5rem 0;">
+  <div class="container">
+    <div class="tag">Capabilities</div>
+    <h2 class="st">What I can<br><span class="pu">build</span> for you.</h2>
+    <div class="bld-grid">
+      <div class="bc fu"><div class="bc-em">🎮</div><div class="bc-t">Python Games</div><div class="bc-d">Arcade games, puzzles, platformers — complete with graphics, sound effects, physics, score systems, and smooth gameplay loops.</div></div>
+      <div class="bc fu d1"><div class="bc-em">🌐</div><div class="bc-t">Websites</div><div class="bc-d">Responsive, modern websites with clean HTML, creative CSS, and interactive JavaScript — looking great on every device and screen size.</div></div>
+      <div class="bc fu d2"><div class="bc-em">🔧</div><div class="bc-t">Python Tools</div><div class="bc-d">Desktop apps, automation scripts, calculators, managers, file tools — anything that makes life easier, built efficiently in Python.</div></div>
+      <div class="bc fu d3"><div class="bc-em">⚙️</div><div class="bc-t">C Programs</div><div class="bc-d">Structured C applications — data management systems, logic programs, and systems-level programs with proper memory and file handling.</div></div>
+      <div class="bc fu"><div class="bc-em">🎨</div><div class="bc-t">Generative Art</div><div class="bc-d">Beautiful algorithmic artwork — spirals, starry nights, rainbow patterns, and more using Python's creative turtle and graphics libraries.</div></div>
+      <div class="bc fu d1"><div class="bc-em">📱</div><div class="bc-t">Responsive Design</div><div class="bc-d">Mobile-first layouts using flexbox and grid that look and work perfectly on phones, tablets, and desktops.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CURRENTLY LEARNING -->
+<div class="lrn-sec">
+  <div class="container">
+    <div class="tag">Right Now</div>
+    <h2 class="st">Currently<br><span class="gr">Learning.</span></h2>
+    <div class="lrn-grid">
+      <div class="lrc fu"><div class="lrc-dot"></div><div class="lrc-ico">⚡</div><div class="lrc-n">Advanced JavaScript</div><div class="lrc-d">DOM manipulation, APIs, async/await, fetch — making web pages truly dynamic and interactive.</div></div>
+      <div class="lrc fu d1"><div class="lrc-dot"></div><div class="lrc-ico">🎯</div><div class="lrc-n">Advanced C</div><div class="lrc-d">Pointers, dynamic memory allocation, linked lists — going deeper into systems-level programming.</div></div>
+      <div class="lrc fu d2"><div class="lrc-dot"></div><div class="lrc-ico">🐍</div><div class="lrc-n">Python Libraries</div><div class="lrc-d">Exploring Pandas, NumPy, and more powerful Python libraries for data and automation.</div></div>
+      <div class="lrc fu d3"><div class="lrc-dot"></div><div class="lrc-ico">🌱</div><div class="lrc-n">Open Source</div><div class="lrc-d">Contributing to GitHub projects and growing my developer presence with the global community.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CAPABILITY TABLE -->
+<section class="sec">
+  <div class="container">
+    <div class="tag">At a Glance</div>
+    <h2 class="st">Full skills<br><span class="gr">breakdown.</span></h2>
+    <div class="cmp-wrap fu">
+      <table class="cmp">
+        <thead><tr><th>Skill / Technology</th><th>Category</th><th>Projects Used In</th><th>Comfortable</th></tr></thead>
+        <tbody>
+          <tr><td>Python (Pygame)</td><td><span class="lt lpy">Python</span></td><td>10+ games</td><td><span class="ck">✓ Yes</span></td></tr>
+          <tr><td>Python (Tkinter / GUI)</td><td><span class="lt lpy">Python</span></td><td>Music Player, Calculator</td><td><span class="ck">✓ Yes</span></td></tr>
+          <tr><td>Python (Turtle Graphics)</td><td><span class="lt lpy">Python</span></td><td>Starry Night, Kaleido-Spiral</td><td><span class="ck">✓ Yes</span></td></tr>
+          <tr><td>HTML5</td><td><span class="lt lweb">Web</span></td><td>3 full websites</td><td><span class="ck">✓ Yes</span></td></tr>
+          <tr><td>CSS3 &amp; Responsive Design</td><td><span class="lt lweb">Web</span></td><td>All web projects</td><td><span class="ck">✓ Yes</span></td></tr>
+          <tr><td>JavaScript</td><td><span class="lt lweb">Web</span></td><td>Codeon Africa, Mental Health</td><td>🔄 Growing</td></tr>
+          <tr><td>C (Structs, Arrays)</td><td><span class="lt lc">C</span></td><td>Student Management, Guess Game</td><td><span class="ck">✓ Yes</span></td></tr>
+          <tr><td>C (Pointers, Memory)</td><td><span class="lt lc">C</span></td><td>Advanced projects</td><td>🔄 Learning</td></tr>
+          <tr><td>Git &amp; GitHub</td><td>Tools</td><td>All projects</td><td><span class="ck">✓ Yes</span></td></tr>
+          <tr><td>Game Design</td><td>Concepts</td><td>10+ games</td><td><span class="ck">✓ Yes</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sec-sm">
+  <div class="container" style="text-align:center;">
+    <h2 class="st">Like what<br>you <span class="gr">see?</span></h2>
+    <p style="color:var(--muted);margin:1.5rem auto 2.5rem;max-width:380px;font-size:1.05rem;">Let's connect and build something great together.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="contact.html" class="btn-g">Get In Touch →</a>
+      <a href="projects.html" class="btn-o">See Projects</a>
+    </div>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="foot-inner">
+    <div class="foot-left">Made with <span>♥</span> by Kafeero Mirembe Mercy &nbsp;·&nbsp; Uganda 🇺🇬</div>
+    <div class="foot-links">
+      <a href="index.html">Home</a><a href="about.html">About</a>
+      <a href="projects.html">Projects</a><a href="skills.html">Skills</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://github.com/K-Mirembe-Mercy/" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+<script>
+// CURSOR
+(function(){
+  var d=document.getElementById('cur'),r=document.getElementById('curR');
+  if(!d||!r)return;
+  var mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;d.style.left=mx+'px';d.style.top=my+'px';});
+  function loop(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(loop);}
+  loop();
+  document.querySelectorAll('a,button').forEach(function(el){
+    el.addEventListener('mouseenter',function(){d.style.transform='translate(-50%,-50%) scale(2.5)';r.style.transform='translate(-50%,-50%) scale(1.4)';});
+    el.addEventListener('mouseleave',function(){d.style.transform='translate(-50%,-50%) scale(1)';r.style.transform='translate(-50%,-50%) scale(1)';});
+  });
+})();
+// MOBILE MENU
+function toggleMenu(){
+  var m=document.getElementById('mobMenu'),h=document.getElementById('ham');
+  var open=!m.classList.contains('open');
+  if(open){m.classList.add('open');h.classList.add('open');document.body.style.overflow='hidden';}
+  else{m.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';}
+}
+function closeMenu(){
+  var m=document.getElementById('mobMenu'),h=document.getElementById('ham');
+  m.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';
+}
+// FADE UP
+(function(){
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('vis');},i*80);}});
+  },{threshold:0.08});
+  document.querySelectorAll('.fu').forEach(function(el){obs.observe(el);});
+})();
+// ACTIVE LINK
+(function(){
+  var p=window.location.pathname.split('/').pop()||'index.html';
+  document.querySelectorAll('.nav-links a').forEach(function(a){if(a.getAttribute('href')===p)a.classList.add('act');});
+})();
+</script>
+<script>
+var bobs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.querySelectorAll('.sb-fill').forEach(function(b){b.style.width=b.dataset.w+'%';});bobs.unobserve(e.target);}});}  ,{threshold:.2});
+document.querySelectorAll('.lc').forEach(function(c){bobs.observe(c);});
+</script>
+</body></html>
